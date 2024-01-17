@@ -36,7 +36,7 @@ export class AuthService {
     };
   }
 
-  async refreshToken(refreshToken: string): Promise<refreshTokenResponse> {
+  async refreshToken(refreshToken: string): Promise<loginResponse> {
     try {
       const decodedToken = this.jwtService.verify(refreshToken);
 
@@ -52,8 +52,10 @@ export class AuthService {
 
       return {
         data: {
+          name: user?.name || '-',
+          email: user?.email || '-',
           access_token: accessToken,
-          refreshToken: refreshToken,
+          refresh_token: refreshToken,
         },
       };
     } catch (error) {

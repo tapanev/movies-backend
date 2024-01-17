@@ -21,6 +21,6 @@ export class AuthController {
   async refresh(@Req() req) {
     const user = await this.authService.refreshToken(req.body.refresh_token);
     if (!user) throw new UnauthorizedException();
-    return this.authService.login(user);
+    return this.authService.login(user.data);
   }
 }
